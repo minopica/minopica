@@ -18,10 +18,15 @@ module.exports = defineConfig({
     url: 'https://rahulshettyacademy.com',
   },
 
+  retries: {
+    runMode: 1
+  },
+
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    specPattern: 'cypress/integration/examples/*.js'
+    //specPattern: 'cypress/integration/examples/*.js'
+    specPattern: 'cypress/integration/test_mino/*.js'
   },
 });

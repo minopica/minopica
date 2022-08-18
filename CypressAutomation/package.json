@@ -9,7 +9,8 @@
     "chromeTest": "npm run test -- --browser chrome",
     "headChromeTest": "npm run test -- --browser chrome --headed",
     "recordDashTestMocha": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf --reporter mochawesome",
-    "recordDashTest": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf"
+    "recordDashTest": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf",
+    "testMino": "npm run test -- --spec 'cypress/integration/test_mino/*'"
   },
   "author": "",
   "license": "ISC",
