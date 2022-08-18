@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-08-18T15:54:56.208Z",
+    "end": "2022-08-18T15:55:02.427Z",
+    "duration": 6219,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "94217134-8b9a-4d4f-b921-0af3824e09a2",
+      "title": "",
+      "fullFile": "cypress/integration/examples/Test6.js",
+      "file": "cypress/integration/examples/Test6.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "014ff4e2-bd5b-40c0-b8a2-459ebe4f7df7",
+          "title": "My fifth test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "My fifth test case",
+              "fullTitle": "My fifth test Suite My fifth test case",
+              "timedOut": null,
+              "duration": 4319,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://rahulshettyacademy.com/AutomationPractice/\"); // mouse over\ncy.get('.mouse-hover-content').invoke('show');\ncy.contains('Top').click();\ncy.go('back'); // force ckick su elementi nascostu\ncy.contains('Top').click({\n  force: true\n});\ncy.url().should('include', 'top');",
+              "err": {},
+              "uuid": "69df54c4-75ab-49ce-85e8-72fcfd31c519",
+              "parentUUID": "014ff4e2-bd5b-40c0-b8a2-459ebe4f7df7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "69df54c4-75ab-49ce-85e8-72fcfd31c519"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4319,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
