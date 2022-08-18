@@ -8,7 +8,8 @@
     "headTest": "npm run test -- --headed",
     "chromeTest": "npm run test -- --browser chrome",
     "headChromeTest": "npm run test -- --browser chrome --headed",
-    "recordDashTest": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf --reporter mochawesome"
+    "recordDashTestMocha": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf --reporter mochawesome",
+    "recordDashTest": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf"
   },
   "author": "",
   "license": "ISC",
