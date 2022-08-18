@@ -3,8 +3,10 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   defaultCommandTimeout: 5000,
   pageLoadTimeout: 30000,
-  projectId: "2iw7j1",
-  reporter: 'mochawesome',
+  projectId: "rwdmnz",
+  //projectId: "2iw7j1",
+  reporter: "spec",
+  //reporter: "mochawesome"
   
   env: {
     url: 'https://rahulshettyacademy.com',

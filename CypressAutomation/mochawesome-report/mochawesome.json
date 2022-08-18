@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2022-08-17T16:59:54.045Z",
-    "end": "2022-08-17T17:00:05.263Z",
-    "duration": 11218,
+    "start": "2022-08-18T15:31:20.724Z",
+    "end": "2022-08-18T15:31:31.774Z",
+    "duration": 11050,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "6308ca8b-5eb8-4aea-8adc-49f3f4b85a07",
+      "uuid": "fddd1d41-4b4b-454f-a9bf-78ce80de5499",
       "title": "",
       "fullFile": "cypress/integration/examples/FrameworkBTestPOM.js",
       "file": "cypress/integration/examples/FrameworkBTestPOM.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "df7686c6-2019-4197-a550-1ecef6c54fbe",
+          "uuid": "59e451c2-63a1-44d3-b181-6e43b700d02c",
           "title": "Framework test Suite",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "My Framework test case",
               "fullTitle": "Framework test Suite My Framework test case",
               "timedOut": null,
-              "duration": 8929,
+              "duration": 8917,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "const homePage = new _HomePage.default();\nconst productsPage = new _ProductsPage.default();\nconst checkoutPage = new _CheckoutPage.default();\ncy.visit(Cypress.env(\"url\") + \"/angularpractice/\"); //cy.get('input[name=\"name\"]').eq(0).type(\"Bob\")\nhomePage.getEditBox().type(this.data.name);\nhomePage.getGender().select(this.data.gender);\nhomePage.getTwoWayDataBinding().should('have.value', this.data.name);\nhomePage.getEditBox().should('have.attr', 'minlength', '2');\nhomePage.getEnterpreneur().should('be.disabled');\nhomePage.getShopTab().click(); // for debugging\n// cy.pause()\nthis.data.productName.forEach(element => cy.selectProduct(element));\nproductsPage.getCheckout().click();\nvar sum = 0;\ncheckoutPage.getProductValues().each(($el, index, $list) => {\n  const valoreProdotto = $el.text();\n  var res = valoreProdotto.split(\" \");\n  res = res[1].trim();\n  sum = Number(sum) + Number(res);\n}).then(function () {\n  cy.log(sum);\n});\ncheckoutPage.getTotalValue().then(function (element) {\n  const valoreTotale = element.text();\n  var tot = valoreTotale.split(\" \");\n  tot = Number(tot[1].trim());\n  expect(sum).to.equal(tot);\n});\ncheckoutPage.getCheckout().click();\ncheckoutPage.getDeliveryLocation().type('India'); // set command timeout only for this specific test\nCypress.config('defaultCommandTimeout', 8000); //cy.wait(5000)\ncheckoutPage.getDeliveryLocationSuggestion().click(); // force click on an element covered by another one\ncheckoutPage.clickCheckBox().click({\n  force: true\n});\ncheckoutPage.clickPurchase().click();\ncheckoutPage.thankYouMessage().then(function (element) {\n  const actualText = element.text();\n  expect(actualText.includes('Success')).to.be.true;\n});",
               "err": {},
-              "uuid": "06dd06e9-0708-4cdf-8217-82fd2ae9b863",
-              "parentUUID": "df7686c6-2019-4197-a550-1ecef6c54fbe",
+              "uuid": "b31d9a1c-64e2-4d28-91f7-75c12a41f491",
+              "parentUUID": "59e451c2-63a1-44d3-b181-6e43b700d02c",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "06dd06e9-0708-4cdf-8217-82fd2ae9b863"
+            "b31d9a1c-64e2-4d28-91f7-75c12a41f491"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 8929,
+          "duration": 8917,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
