@@ -12,14 +12,25 @@
     "recordDashTest": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf",
     "testMino": "npm run test -- --spec 'cypress/integration/test_mino/*'"
   },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^10.4.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-iframe": "^1.0.1",
     "mocha": "^10.0.0",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.2.1",
-    "mochawesome-report-generator": "^6.2.0"
+    "mochawesome-report-generator": "^6.2.0",
+    "multiple-cucumber-html-reporter": "^1.21.6"
   }
 }

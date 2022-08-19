@@ -4,8 +4,8 @@ describe('My second test Suite', function()
 {
 it('My second test case', function()
 {
-    //cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
-    cy.visit("https://rahulshettyacademy.com/selenXXXXXX")
+    cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
+    //cy.visit("https://rahulshettyacademy.com/selenXXXXXX")
     cy.get('.search-keyword').type('ca')
     cy.wait(2000)
 

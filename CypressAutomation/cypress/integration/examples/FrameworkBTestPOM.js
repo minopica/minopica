@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 /// <reference types="Cypress-iframe" />
 import 'cypress-iframe'
-import HomePage from '../pageObjects/HomePage'
-import ProductsPage from '../pageObjects/ProductsPage'
-import CheckoutPage from '../pageObjects/CheckoutPage'
+import HomePage from '../../support/pageObjects/HomePage'
+import ProductsPage from '../../support/pageObjects/ProductsPage'
+import CheckoutPage from '../../support/pageObjects/CheckoutPage'
 
 describe('Framework test Suite', function()
 {

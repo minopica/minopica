@@ -1,4 +1,5 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require("cypress")
+const cucumber = require('cypress-cucumber-preprocessor').default
 
 module.exports = defineConfig({
   defaultCommandTimeout: 5000,
@@ -25,8 +26,11 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      on('file:preprocessor', cucumber())
     },
     //specPattern: 'cypress/integration/examples/*.js'
-    specPattern: 'cypress/integration/test_mino/*.js'
+    //specPattern: 'cypress/integration/test_mino/*.js'
+    //specPattern: 'cypress/integration/*/*.js'
+    specPattern: 'cypress/integration/examples/BDD/*.feature'
   },
 });
