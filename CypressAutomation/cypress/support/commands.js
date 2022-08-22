@@ -23,6 +23,18 @@ Cypress.Commands.add('selectProduct', (productName) => {
 
  })
 
+ // custom command for login in order to extract token
+
+ Cypress.Commands.add('LoginAPI', () => { 
+
+    cy.request("POST","https://rahulshettyacademy.com/api/ecom/auth/login",{"userEmail":"minopica@gmail.com","userPassword":"Minone@h3g"})
+    .then(function(response)
+    {
+        expect(response.status).to.eq(200)
+        Cypress.env('token',response.body.token)
+    })
+
+ })
 
 //
 // -- This is a child command --

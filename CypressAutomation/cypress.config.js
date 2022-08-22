@@ -30,7 +30,7 @@ module.exports = defineConfig({
     },
     //specPattern: 'cypress/integration/examples/*.js'
     //specPattern: 'cypress/integration/test_mino/*.js'
-    //specPattern: 'cypress/integration/*/*.js'
-    specPattern: 'cypress/integration/examples/BDD/*.feature'
+    specPattern: 'cypress/integration/*/*.js'
+    //specPattern: 'cypress/integration/examples/BDD/*.feature'
   },
 });
