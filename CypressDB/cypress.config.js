@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const sqlServer = require('cypress-sql-server');
 
 {
   db = {
@@ -13,12 +14,15 @@ const { defineConfig } = require("cypress");
   }
 }
 
+
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      tasks = sqlServer.loadDBPlugin(db);
+      on('task', tasks);
     },
-    specPattern: 'cypress/e2e/*/*.js'
+    specPattern: 'cypress/e2e/*/*.js',
   },
 });
 
