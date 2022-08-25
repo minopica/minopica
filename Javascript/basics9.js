@@ -12,7 +12,7 @@ export default class Pet extends Person
         super(firstName,lastName)
     }
 
-    get Location()
+    get location()
     {
         return "BlueCross"
     }

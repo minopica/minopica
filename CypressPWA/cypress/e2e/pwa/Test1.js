@@ -1,0 +1,26 @@
+/// <reference types="Cypress" />
+
+describe('My first test Suite', function()
+{
+it('My first test case', function()
+{
+    Cypress.config('defaultCommandTimeout', 10000)
+    cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
+    cy.get('#login_entra').click()
+    //click su inserisci email/num di tel
+    cy.get('#firstInput').type("3931113321@example.com")
+    cy.get('#login_continua').click()
+    cy.get("input[formcontrolname='password']").type('12345678')
+    cy.get('#accedi').click()
+    cy.get('#credit_banner_ricarica').click()
+    cy.contains('aggiungi altro metodo di pagamento').click()
+    cy.contains("Carta di credito").click()
+    cy.get('.execute-submit').click()
+    cy.get('input[placeholder="Nome e cognome intestatario"]').type("Antimo")
+    cy.get('#back-button').click()
+
+}
+)
+
+}
+)
