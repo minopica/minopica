@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-describe('My first test Suite', function()
+describe('PWA test - Ricarica', function()
 {
-it('My first test case', function()
+it('Ricarica - controllo webview SIA per inserimento CDC - env BS', function()
 {
     Cypress.config('defaultCommandTimeout', 10000)
     cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
