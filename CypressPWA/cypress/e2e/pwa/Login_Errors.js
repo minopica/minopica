@@ -1,16 +1,34 @@
 /// <reference types="Cypress" />
+import LoginPage from '../../support/pageObjects/LoginPage.js'
 
 describe('PWA test - Gestione Errori Login', function()
 {
+    const loginPage = new LoginPage()
+
+    before(() => {
+        // runs once before all tests
+        cy.fixture('example.json').then(function(data)
+        {
+            this.data = data
+        }
+        )
+
+      })
+
 it('Login - errore HTTP 404', function()
 {
+    //const loginPage = new LoginPage()
     Cypress.config('defaultCommandTimeout', 10000)
     cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
-    cy.get('#login_entra').click()
+    //cy.get('#login_entra').click()
+    loginPage.getEntraButton().click()
     //click su inserisci email/num di tel
-    cy.get('#firstInput').type("3931113321@example.com")
-    cy.get('#login_continua').click()
-    cy.get("input[formcontrolname='password']").type('12345678')
+    //cy.get('#firstInput').type("3931113321@example.com")
+    loginPage.getUsernameTextField().type("3931113321@example.com")
+    //cy.get('#login_continua').click()
+    loginPage.getContinuaButton().click()
+    //cy.get("input[formcontrolname='password']").type('12345678')
+    loginPage.getPasswordTextField().type('12345678')
     
 
     cy.intercept({
@@ -28,7 +46,8 @@ it('Login - errore HTTP 404', function()
     ).as('responseLogin')
 
 
-    cy.get('#accedi').click()
+    //cy.get('#accedi').click()
+    loginPage.getAccediButton().click()
     cy.wait('@responseLogin')
 
     cy.get('.error-type').should("have.text","Ops, si è verificato un problema")
