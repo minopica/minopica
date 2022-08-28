@@ -6,6 +6,12 @@ module.exports = defineConfig({
   defaultCommandTimeout: 20000,
   pageLoadTimeout: 60000,
   watchForFileChanges: false,
+
+  env: {
+    url_bs: 'https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login',
+    url_test: "http://pwa.dev.windtre.it/oa/auth/login"
+  },
+
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here

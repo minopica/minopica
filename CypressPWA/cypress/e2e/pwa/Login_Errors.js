@@ -19,7 +19,8 @@ it('Login - errore HTTP 404', function()
 {
     //const loginPage = new LoginPage()
     Cypress.config('defaultCommandTimeout', 10000)
-    cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
+    //cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
+    cy.visit(Cypress.env("url_bs"))
     //cy.get('#login_entra').click()
     loginPage.getEntraButton().click()
     //click su inserisci email/num di tel
@@ -57,12 +58,11 @@ it('Login - errore HTTP 404', function()
 it('Login - errore HTTP 401', function()
 {
     Cypress.config('defaultCommandTimeout', 10000)
-    cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
-    cy.get('#login_entra').click()
-    //click su inserisci email/num di tel
-    cy.get('#firstInput').type("3931113321@example.com")
-    cy.get('#login_continua').click()
-    cy.get("input[formcontrolname='password']").type('12345678')
+    cy.visit(Cypress.env("url_bs"))
+    loginPage.getEntraButton().click()
+    loginPage.getUsernameTextField().type("3931113321@example.com")
+    loginPage.getContinuaButton().click()
+    loginPage.getPasswordTextField().type('12345678')
     
 
     cy.intercept({
@@ -76,7 +76,7 @@ it('Login - errore HTTP 401', function()
     ).as('responseLogin')
 
 
-    cy.get('#accedi').click()
+    loginPage.getAccediButton().click()
     cy.wait('@responseLogin')
 
     cy.get('.error-type').should("have.text","Ops, si è verificato un problema")
@@ -87,12 +87,11 @@ it('Login - errore HTTP 401', function()
 it('Login - errore dentro HTTP 200 - credenziali errate', function()
 {
     Cypress.config('defaultCommandTimeout', 10000)
-    cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
-    cy.get('#login_entra').click()
-    //click su inserisci email/num di tel
-    cy.get('#firstInput').type("3931113321@example.com")
-    cy.get('#login_continua').click()
-    cy.get("input[formcontrolname='password']").type('12345678')
+    cy.visit(Cypress.env("url_bs"))
+    loginPage.getEntraButton().click()
+    loginPage.getUsernameTextField().type("3931113321@example.com")
+    loginPage.getContinuaButton().click()
+    loginPage.getPasswordTextField().type('12345678')
     
 
     cy.intercept({
@@ -106,7 +105,7 @@ it('Login - errore dentro HTTP 200 - credenziali errate', function()
     ).as('responseLogin')
 
 
-    cy.get('#accedi').click()
+    loginPage.getAccediButton().click()
     cy.wait('@responseLogin')
 
     cy.get('.error-type').should("have.text","Non ti abbiamo riconosciuto")
