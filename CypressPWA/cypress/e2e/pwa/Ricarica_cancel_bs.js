@@ -25,9 +25,17 @@ it('Ricarica - controllo chiamata cancel in webview SIA al back da inserimento C
     ).as('requestCancel')
 
     cy.get('#back-button').click()
-    cy.wait('@requestCancel').should(({request,response}) =>
-    {
-        expect(response.statusCode).to.equal(200)
+
+    // cy.wait('@requestCancel').then(({request,response}) =>
+    // {
+    //     expect(response.statusCode).to.equal(200)
+    // })
+
+    cy.wait('@requestCancel').then((intercept)=>{
+        console.log(intercept); //will log a cy object containing the response
+        console.log(intercept.response.body.status); //will log what you need
+        expect(intercept.response.statusCode).to.be.eq(200); //should work
+        expect(intercept.response.body.status).to.be.eq("OK"); //should work
     })
  
 

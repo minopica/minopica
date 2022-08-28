@@ -4,7 +4,7 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   projectId: "rwdmnz",
   defaultCommandTimeout: 20000,
-  pageLoadTimeout: 30000,
+  pageLoadTimeout: 60000,
   watchForFileChanges: false,
   e2e: {
     setupNodeEvents(on, config) {
