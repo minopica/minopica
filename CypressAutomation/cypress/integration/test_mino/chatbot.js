@@ -19,8 +19,6 @@ describe('PWA test - Chatbot', function()
 
 it('Chatbot - scrivi ad un operatore', function()
 {
-    cy.clearLocalStorage()
-    cy.clearCookies()
     Cypress.config('defaultCommandTimeout', 10000)
     cy.visit(Cypress.env("url_bs"))
     loginPage.getEntraButton().click()
@@ -31,17 +29,10 @@ it('Chatbot - scrivi ad un operatore', function()
     cy.wait(10000)
     cy.get('#will').click()
     // switch to iframe
-    cy.wait(5000)
+    cy.wait(10000)
     cy.frameLoaded('#willie')
     
-    cy.iframe('#willie').find('input[type="text"]').type('reset password')
-    cy.iframe('#willie').find('#btn-send').click()
-    cy.iframe('#willie').find('.option.position-relative').then(function(element){
-        let tot = element.length
-        console.log("numero pulsanti risposta: "+  tot)
-        cy.log("numero pulsanti risposta: "+  tot)
-        //cy.wrap(element).eq(0).click({force: true})
-    })
+    cy.iframe().find('input[type="text"]').type('reset password')
 
 }
 )

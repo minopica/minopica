@@ -29,9 +29,7 @@ it('Winday linea registrata', function()
     cy.get("img[alt='winday']").click()
     // switch to iframe
     cy.frameLoaded('iframe[title="Windtre"]')
-    cy.iframe().contains('GIOCA')
-    // cy.get('iframe[title="Windtre"]').its('0.contentDocument.body').contains('GIOCA')
-    // cy.wait(4000)
+    cy.iframe('iframe[title="Windtre"]').contains('GIOCA ORA').click()
 }
 )
 
