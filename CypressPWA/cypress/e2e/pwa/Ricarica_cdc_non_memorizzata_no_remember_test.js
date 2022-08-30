@@ -10,7 +10,7 @@ it('Ricarica senza cdc memorizzata no remember - env test', function()
     cy.log("Questo è un log cy: click su inserisci email/num di test")
     console.log("Questo è un console log: click su inserisci email/num di test")
     //click su inserisci email/num di tel
-    cy.get('#firstInput').type("cambio@test.it")
+    cy.get('#firstInput').type("107935_10f1@test.it")
     cy.get('#login_continua').click()
     cy.get("input[formcontrolname='password']").type('12345678')
     cy.get('#accedi').click()
@@ -37,7 +37,7 @@ it('Ricarica senza cdc memorizzata no remember - env test', function()
     cy.get('#confirm-payment-button').click() 
 
     // assert su thankyou page
-    cy.wait(10000)
+    cy.wait(15000)
     cy.get("h2[class$='section-title-w-des']").should("have.text","GRAZIE!")
 
 }
