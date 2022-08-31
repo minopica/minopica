@@ -18,7 +18,7 @@ describe('PWA test - Gestione Errori Login', function()
 it('Login - errore HTTP 404', function()
 {
     //const loginPage = new LoginPage()
-    Cypress.config('defaultCommandTimeout', 10000)
+    Cypress.config('defaultCommandTimeout', 20000)
     //cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
     cy.visit(Cypress.env("url_bs"))
     //cy.get('#login_entra').click()
@@ -57,7 +57,7 @@ it('Login - errore HTTP 404', function()
 
 it('Login - errore HTTP 401', function()
 {
-    Cypress.config('defaultCommandTimeout', 10000)
+    Cypress.config('defaultCommandTimeout', 20000)
     cy.visit(Cypress.env("url_bs"))
     loginPage.getEntraButton().click()
     loginPage.getUsernameTextField().type("3931113321@example.com")
@@ -86,7 +86,7 @@ it('Login - errore HTTP 401', function()
 
 it('Login - errore dentro HTTP 200 - credenziali errate', function()
 {
-    Cypress.config('defaultCommandTimeout', 10000)
+    Cypress.config('defaultCommandTimeout', 20000)
     cy.visit(Cypress.env("url_bs"))
     loginPage.getEntraButton().click()
     loginPage.getUsernameTextField().type("3931113321@example.com")

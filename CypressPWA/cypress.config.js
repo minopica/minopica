@@ -6,6 +6,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 20000,
   pageLoadTimeout: 60000,
   watchForFileChanges: false,
+  experimentalModifyObstructiveThirdPartyCode: true,
 
   env: {
     url_bs: 'https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login',
