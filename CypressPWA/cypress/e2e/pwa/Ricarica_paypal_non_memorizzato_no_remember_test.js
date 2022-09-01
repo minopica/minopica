@@ -38,7 +38,7 @@ it('Ricarica senza cdc memorizzata no remember - env test', function()
 
     cy.get('#email').clear().type("patrizio.tagliani@windtre.it")
     cy.get('#password').type("patrizio!")
-    cy.pause()
+    //cy.pause()
     // click su Accedi
     cy.get('#btnLogin').click().debug()
 
