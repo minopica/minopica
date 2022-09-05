@@ -1,0 +1,16 @@
+{
+  "name": "cypress_test_pwa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/cypress run",
+    "recordDashTest": "npm run test -- --record --key 9ea05ca1-b772-4204-9e60-1af2f5551dcf"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^10.7.0",
+    "cypress-iframe": "^1.0.1"
+  }
+}
