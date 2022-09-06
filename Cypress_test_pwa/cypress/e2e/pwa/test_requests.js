@@ -15,10 +15,12 @@ describe('PWA test - Test API', function()
 
       })
 
-it('Login - estrazione token, codice cliente', function()
+it('Login - estrazione token, codice cliente, lineId, contractId', function()
 {
     var token = ''
     var codice_cliente = ''
+    var lineId = ''
+    var contractId = ''
     //const loginPage = new LoginPage()
     Cypress.config('defaultCommandTimeout', 20000)
     cy.visit(Cypress.env("url_bs"))
@@ -43,10 +45,16 @@ it('Login - estrazione token, codice cliente', function()
         expect(intercept.response.statusCode).to.be.eq(200); //should work
         token = intercept.response.headers['x-w3-token']
         codice_cliente = intercept.response.body.data.summary.contracts[0].code
+        lineId = intercept.response.body.data.contracts[0].lines[0].id
+        contractId = intercept.response.body.data.contracts[0].lines[0].contractId
         console.log('token JWT: ' + token)
         console.log('codice cliente: ' + codice_cliente)
+        console.log('lineId: ' + lineId)
+        console.log('contractId: ' + contractId)
         cy.task('saveToken', token)
         cy.task('saveCodiceCliente', codice_cliente)
+        cy.task('saveLineId', lineId)
+        cy.task('saveContractId', contractId)
     })
 
 }
@@ -57,6 +65,8 @@ it('api/ob/v2/contract/lineunfolded', function()
 {
     var token = ''
     var codice_cliente = ''
+    var lineId = ''
+    var contractId = ''
 
     cy.task('loadToken').then((jwt) => {
         console.log('token jwt: ' + jwt)
@@ -65,34 +75,41 @@ it('api/ob/v2/contract/lineunfolded', function()
             console.log('codice_cliente caricato: ' + code)
             codice_cliente = code
         })
+        cy.task('loadLineId').then((linea) => {
+            console.log('lineId caricato: ' + linea)
+            lineId = linea
+            console.log(lineId)
+        })
+        cy.task('loadContractId').then((contratto) => {
+            console.log('contractId caricato: ' + contratto)
+            contractId = contratto
+            console.log(contractId)
 
-        cy.request({
-            method: 'GET',
-            url: 'https://apigw.bs.windtre.it/api/ob/v2/contract/lineunfolded',
-            qs: {
-                contractId: 1378403976115,
-                lineId: 3273448807,
-              },
-            headers: {
-                Authorization: 'Bearer ' + token,
-                'X-Wind-Client': 'web',
-                'X-Brand': 'ONEBRAND',
-                //'Customer-Id': 542648434
-                'Customer-Id': codice_cliente
-            }
+            cy.request({
+                method: 'GET',
+                url: 'https://apigw.bs.windtre.it/api/ob/v2/contract/lineunfolded',
+                qs: {
+                    "contractId": contractId,
+                    "lineId": lineId,
+                  },
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'X-Wind-Client': 'web',
+                    'X-Brand': 'ONEBRAND',
+                    'Customer-Id': codice_cliente
+                }
+        
+              }).then((resp) => {
+                // redirect status code is 302
+                expect(resp.status).to.eq(200)
+              })
     
-          }).then((resp) => {
-            // redirect status code is 302
-            expect(resp.status).to.eq(200)
-          })
-
-    })
-    
-
-
+        })
+        
+    }
+    )
 }
 )
-
 
 it('/api/v1/app/analytics/token', function()
 {
@@ -117,18 +134,14 @@ it('/api/v1/app/analytics/token', function()
                 'Customer-Id': codice_cliente
             }
     
-          }).then((resp) => {
+            }).then((resp) => {
             // redirect status code is 302
             expect(resp.status).to.eq(200)
-          })
+            })
 
     })
-    
 
-
-}
-)
-
+    })
 
 }
 )

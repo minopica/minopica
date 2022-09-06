@@ -34,6 +34,22 @@ module.exports = defineConfig({
         loadCodiceCliente() {
           return store['codice_cliente']
         },
+        saveLineId(linea) {
+          console.log('lineId salvato:' + linea)
+          store['lineId'] = linea
+          return null
+        },
+        loadLineId() {
+          return store['lineId']
+        },
+        saveContractId(contratto) {
+          console.log('contractId salvato:' + contratto)
+          store['contractId'] = contratto
+          return null
+        },
+        loadContractId() {
+          return store['contractId']
+        },
 
       })
     },
