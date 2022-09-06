@@ -15,9 +15,10 @@ describe('PWA test - Test API', function()
 
       })
 
-it('Login - estrazione token', function()
+it('Login - estrazione token, codice cliente', function()
 {
     var token = ''
+    var codice_cliente = ''
     //const loginPage = new LoginPage()
     Cypress.config('defaultCommandTimeout', 20000)
     cy.visit(Cypress.env("url_bs"))
@@ -41,8 +42,11 @@ it('Login - estrazione token', function()
         console.log(intercept.response.body.status); //will log what you need
         expect(intercept.response.statusCode).to.be.eq(200); //should work
         token = intercept.response.headers['x-w3-token']
-        console.log(token)
+        codice_cliente = intercept.response.body.data.summary.contracts[0].code
+        console.log('token JWT: ' + token)
+        console.log('codice cliente: ' + codice_cliente)
         cy.task('saveToken', token)
+        cy.task('saveCodiceCliente', codice_cliente)
     })
 
 }
@@ -52,10 +56,15 @@ it('Login - estrazione token', function()
 it('api/ob/v2/contract/lineunfolded', function()
 {
     var token = ''
+    var codice_cliente = ''
 
     cy.task('loadToken').then((jwt) => {
         console.log('token jwt: ' + jwt)
         token = jwt
+        cy.task('loadCodiceCliente').then((code) => {
+            console.log('codice_cliente caricato: ' + code)
+            codice_cliente = code
+        })
 
         cy.request({
             method: 'GET',
@@ -68,7 +77,8 @@ it('api/ob/v2/contract/lineunfolded', function()
                 Authorization: 'Bearer ' + token,
                 'X-Wind-Client': 'web',
                 'X-Brand': 'ONEBRAND',
-                'Customer-Id': 542648434
+                //'Customer-Id': 542648434
+                'Customer-Id': codice_cliente
             }
     
           }).then((resp) => {
@@ -87,10 +97,15 @@ it('api/ob/v2/contract/lineunfolded', function()
 it('/api/v1/app/analytics/token', function()
 {
     var token = ''
+    var codice_cliente = ''
 
     cy.task('loadToken').then((jwt) => {
         console.log('token jwt: ' + jwt)
         token = jwt
+        cy.task('loadCodiceCliente').then((code) => {
+            console.log('codice_cliente caricato: ' + code)
+            codice_cliente = code
+        })
 
         cy.request({
             method: 'GET',
@@ -99,7 +114,7 @@ it('/api/v1/app/analytics/token', function()
                 Authorization: 'Bearer ' + token,
                 'X-Wind-Client': 'web',
                 'X-Brand': 'ONEBRAND',
-                'Customer-Id': 542648434
+                'Customer-Id': codice_cliente
             }
     
           }).then((resp) => {

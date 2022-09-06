@@ -26,6 +26,14 @@ module.exports = defineConfig({
         loadToken() {
           return store['token']
         },
+        saveCodiceCliente(code) {
+          console.log('codice cliente salvato:' + code)
+          store['codice_cliente'] = code
+          return null
+        },
+        loadCodiceCliente() {
+          return store['codice_cliente']
+        },
 
       })
     },
