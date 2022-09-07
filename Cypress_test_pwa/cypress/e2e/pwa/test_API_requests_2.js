@@ -50,89 +50,169 @@ describe('PWA test - Test API', function()
                     })
             }
             )
+        
 
+        it('/api/v1/strong-auth/otp/generate', function()
+            {
+                var challengeToken = ''
 
-        // it('api/ob/v2/contract/lineunfolded', function()
-        //     {
-        //         var token = ''
-        //         var codice_cliente = ''
-        //         var lineId = ''
-        //         var contractId = ''
-
-        //         cy.task('loadToken').then((jwt) => {
-        //             console.log('token jwt: ' + jwt)
-        //             token = jwt
-        //             cy.task('loadCodiceCliente').then((code) => {
-        //                 console.log('codice_cliente caricato: ' + code)
-        //                 codice_cliente = code
-        //             })
-        //             cy.task('loadLineId').then((linea) => {
-        //                 console.log('lineId caricato: ' + linea)
-        //                 lineId = linea
-        //                 console.log(lineId)
-        //             })
-        //             cy.task('loadContractId').then((contratto) => {
-        //                 console.log('contractId caricato: ' + contratto)
-        //                 contractId = contratto
-        //                 console.log(contractId)
-
-        //                 cy.request({
-        //                     method: 'GET',
-        //                     url: 'https://apigw.bs.windtre.it/api/ob/v2/contract/lineunfolded',
-        //                     qs: {
-        //                         "contractId": contractId,
-        //                         "lineId": lineId,
-        //                     },
-        //                     headers: {
-        //                         Authorization: 'Bearer ' + token,
-        //                         'X-Wind-Client': 'web',
-        //                         'X-Brand': 'ONEBRAND',
-        //                         'Customer-Id': codice_cliente
-        //                     }
+                cy.task('loadChallengeToken').then((jwt) => {
+                    console.log('token jwt: ' + jwt)
+                    challengeToken = jwt
                     
-        //                 }).then((resp) => {
-        //                     // redirect status code is 302
-        //                     expect(resp.status).to.eq(200)
-        //                 })
+                    cy.request({
+                        method: 'POST',
+                        url: 'https://apigw.bs.windtre.it/api/v1/strong-auth/otp/generate',
+                        headers: {
+                            "X-W3-Challenge-Token": challengeToken,
+                            'X-Wind-Client': 'app-ios',
+                            'X-Brand': 'ONEBRAND',
+                        },
+                        body: {
+                            "email": credenziali.username
+                        }
                 
-        //             })
+                    }).then((resp) => {
+                        // redirect status code is 302
+                        expect(resp.status).to.eq(200)
+                        expect(resp.body.status).to.be.equal('OK')
+                    })
+                
+                    })
                     
-        //         }
-        //         )
-        //     }
-        //     )
+            }
+            )
 
-        // it('/api/v1/app/analytics/token', function()
-        //     {
-        //         var token = ''
-        //         var codice_cliente = ''
+        it('/api/v1/strong-auth/otp/verify', function()
+            {
+                var challengeToken = ''
+                var token = ''
+                var codice_cliente = ''
+                var lineId = ''
+                var contractId = ''
 
-        //         cy.task('loadToken').then((jwt) => {
-        //             console.log('token jwt: ' + jwt)
-        //             token = jwt
-        //             cy.task('loadCodiceCliente').then((code) => {
-        //                 console.log('codice_cliente caricato: ' + code)
-        //                 codice_cliente = code
-        //             })
+                cy.task('loadChallengeToken').then((jwt) => {
+                    console.log('token jwt: ' + jwt)
+                    challengeToken = jwt
 
-        //             cy.request({
-        //                 method: 'GET',
-        //                 url: 'https://apigw.bs.windtre.it/api/v1/app/analytics/token',
-        //                 headers: {
-        //                     Authorization: 'Bearer ' + token,
-        //                     'X-Wind-Client': 'web',
-        //                     'X-Brand': 'ONEBRAND',
-        //                     'Customer-Id': codice_cliente
-        //                 }
+                    cy.request({
+                        method: 'POST',
+                        url: 'https://apigw.bs.windtre.it/api/v1/strong-auth/otp/verify',
+                        headers: {
+                            "X-W3-Challenge-Token": challengeToken,
+                            'X-Wind-Client': 'app-ios',
+                            'X-Brand': 'ONEBRAND',
+                        },
+                        body: {
+                            "email": credenziali.username,
+                            "otp": "123456"
+                        }
                 
-        //                 }).then((resp) => {
-        //                 // redirect status code is 302
-        //                 expect(resp.status).to.eq(200)
-        //                 })
+                        }).then((resp) => {
+                        expect(resp.status).to.eq(200)
+                        expect(resp.body.status).to.be.equal('OK')
 
-        //         })
+                        token = resp.headers['x-w3-token']
+                        codice_cliente = resp.body.data.summary.contracts[0].code
+                        lineId = resp.body.data.contracts[0].lines[0].id
+                        contractId = resp.body.data.contracts[0].lines[0].contractId
+                        console.log('token JWT: ' + token)
+                        console.log('codice cliente: ' + codice_cliente)
+                        console.log('lineId: ' + lineId)
+                        console.log('contractId: ' + contractId)
+                        cy.task('saveToken', token)
+                        cy.task('saveCodiceCliente', codice_cliente)
+                        cy.task('saveLineId', lineId)
+                        cy.task('saveContractId', contractId)
 
-        //     })
+                        })
+
+                })
+
+            })
+        
+        it('api/ob/v2/contract/lineunfolded', function()
+            {
+                var token = ''
+                var codice_cliente = ''
+                var lineId = ''
+                var contractId = ''
+
+                cy.task('loadToken').then((jwt) => {
+                    console.log('token jwt: ' + jwt)
+                    token = jwt
+                    cy.task('loadCodiceCliente').then((code) => {
+                        console.log('codice_cliente caricato: ' + code)
+                        codice_cliente = code
+                    })
+                    cy.task('loadLineId').then((linea) => {
+                        console.log('lineId caricato: ' + linea)
+                        lineId = linea
+                        console.log(lineId)
+                    })
+                    cy.task('loadContractId').then((contratto) => {
+                        console.log('contractId caricato: ' + contratto)
+                        contractId = contratto
+                        console.log(contractId)
+
+                        cy.request({
+                            method: 'GET',
+                            url: 'https://apigw.bs.windtre.it/api/ob/v2/contract/lineunfolded',
+                            qs: {
+                                "contractId": contractId,
+                                "lineId": lineId,
+                            },
+                            headers: {
+                                Authorization: 'Bearer ' + token,
+                                'X-Wind-Client': 'web',
+                                'X-Brand': 'ONEBRAND',
+                                'Customer-Id': codice_cliente
+                            }
+                    
+                        }).then((resp) => {
+                            // redirect status code is 302
+                            expect(resp.status).to.eq(200)
+                        })
+                
+                    })
+                    
+                }
+                )
+            }
+            )
+
+        it('/api/v1/app/analytics/token', function()
+            {
+                var token = ''
+                var codice_cliente = ''
+
+                cy.task('loadToken').then((jwt) => {
+                    console.log('token jwt: ' + jwt)
+                    token = jwt
+                    cy.task('loadCodiceCliente').then((code) => {
+                        console.log('codice_cliente caricato: ' + code)
+                        codice_cliente = code
+                    })
+
+                    cy.request({
+                        method: 'GET',
+                        url: 'https://apigw.bs.windtre.it/api/v1/app/analytics/token',
+                        headers: {
+                            Authorization: 'Bearer ' + token,
+                            'X-Wind-Client': 'web',
+                            'X-Brand': 'ONEBRAND',
+                            'Customer-Id': codice_cliente
+                        }
+                
+                        }).then((resp) => {
+                        // redirect status code is 302
+                        expect(resp.status).to.eq(200)
+                        })
+
+                })
+
+            })
+
 
     })
 
