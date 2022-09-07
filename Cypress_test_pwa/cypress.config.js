@@ -14,6 +14,7 @@ module.exports = defineConfig({
   },
 
   e2e: {
+    experimentalStudio: true,
     setupNodeEvents(on, config) {
       // implement node event listeners here
       const store = {}
@@ -25,6 +26,14 @@ module.exports = defineConfig({
         },
         loadToken() {
           return store['token']
+        },
+        saveChallengeToken(jwt) {
+          console.log('token saveChallengeToken jwt:' + jwt)
+          store['challengeToken'] = jwt
+          return null
+        },
+        loadChallengeToken() {
+          return store['challengeToken']
         },
         saveCodiceCliente(code) {
           console.log('codice cliente salvato:' + code)
