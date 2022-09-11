@@ -6,7 +6,6 @@ module.exports = defineConfig({
   defaultCommandTimeout: 20000,
   pageLoadTimeout: 60000,
   watchForFileChanges: false,
-  //experimentalModifyObstructiveThirdPartyCode: true,
 
   env: {
     url_bs: 'https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login',
@@ -15,6 +14,8 @@ module.exports = defineConfig({
 
   e2e: {
     experimentalStudio: true,
+    // experimentalModifyObstructiveThirdPartyCode: true,
+    // experimentalSessionAndOrigin: true,
     setupNodeEvents(on, config) {
       // implement node event listeners here
       const store = {}
@@ -58,6 +59,14 @@ module.exports = defineConfig({
         },
         loadContractId() {
           return store['contractId']
+        },
+        saveArrayContracts(contratti) {
+          console.log('array contratti salvato:' + contratti)
+          store['arrayContracts'] = contratti
+          return null
+        },
+        loadArrayContracts() {
+          return store['arrayContracts']
         },
 
       })
