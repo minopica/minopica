@@ -1,0 +1,88 @@
+[
+  {
+    "id": "1439526673604",
+    "customerId": "10493755",
+    "status": "ACTIVE",
+    "brand": "WIND",
+    "paymentType": "PRE",
+    "sme": false,
+    "flagMigrazione": "N",
+    "lines": [
+      {
+        "id": "3931113321",
+        "customerId": "10493755",
+        "contractId": "1439526673604",
+        "alias": "Davide     ",
+        "mobile": true,
+        "sme": false,
+        "paymentType": "PRE",
+        "simCard": {
+          "id": "3931113321",
+          "lineId": "3931113321",
+          "puk": null,
+          "simType": "LTE"
+        },
+        "tariffPlan": null,
+        "integrationStack": "LEGACY",
+        "features": [
+          "MOBILE"
+        ],
+        "lineAdslId": "3931113321",
+        "flagMigrazione": "N",
+        "dataAttivazionePhoenix": "09/14/2018",
+        "dataAttivazionePeoplesoft": "",
+        "idPortfolioPeoplesoft": "",
+        "idClientePeoplesoft": "",
+        "simType": null,
+        "flagFarc": "N",
+        "idBillingAccount": "",
+        "sharedFarcCdf": false,
+        "wasTied": "NA",
+        "flagInstallment": false
+      }
+    ]
+  },
+  {
+    "id": "1513851613922",
+    "customerId": "10493755",
+    "status": "CEASED",
+    "brand": "WIND",
+    "paymentType": "PRE",
+    "sme": false,
+    "flagMigrazione": "N",
+    "lines": [
+      {
+        "id": "3287504918",
+        "customerId": "10493755",
+        "contractId": "1513851613922",
+        "alias": "3287504918",
+        "mobile": true,
+        "sme": false,
+        "paymentType": "PRE",
+        "simCard": {
+          "id": "3287504918",
+          "lineId": "3287504918",
+          "puk": null,
+          "simType": "LTE"
+        },
+        "tariffPlan": null,
+        "integrationStack": "LEGACY",
+        "features": [
+          "MOBILE"
+        ],
+        "lineAdslId": "3287504918",
+        "flagMigrazione": "N",
+        "dataAttivazionePhoenix": "11/30/2020",
+        "dataAttivazionePeoplesoft": "",
+        "idPortfolioPeoplesoft": "",
+        "idClientePeoplesoft": "",
+        "simType": null,
+        "flagFarc": "N",
+        "idBillingAccount": "",
+        "sharedFarcCdf": false,
+        "wasTied": "N",
+        "flagInstallment": false
+      }
+    ]
+  }
+]

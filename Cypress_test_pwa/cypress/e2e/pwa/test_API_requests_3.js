@@ -90,7 +90,6 @@ describe('PWA test - Test API', function()
                 var codice_cliente = ''
                 var lineId = ''
                 var contractId = ''
-                //var arrayContracts = ''
 
                 cy.task('loadChallengeToken').then((jwt) => {
                     console.log('token jwt: ' + jwt)
@@ -128,7 +127,8 @@ describe('PWA test - Test API', function()
                         cy.task('saveLineId', lineId)
                         cy.task('saveContractId', contractId)
                         cy.task('saveArrayContracts', arrayContracts)
-
+                        cy.writeFile('cypress/downloads/arrayContracts.txt',arrayContracts)
+                        Cypress.env('arrayContracts', arrayContracts)
 
                         })
 
@@ -136,7 +136,7 @@ describe('PWA test - Test API', function()
 
             })
 
-        it('api/ob/v2/contract/lineunfolded', function()
+            it('api/ob/v2/contract/lineunfolded', function()
             {
                 var token = ''
                 var codice_cliente = ''
@@ -146,56 +146,57 @@ describe('PWA test - Test API', function()
                 cy.task('loadToken').then((jwt) => {
                     console.log('token jwt: ' + jwt)
                     token = jwt
-                    cy.task('loadCodiceCliente').then((code) => {
-                        console.log('codice_cliente caricato: ' + code)
-                        codice_cliente = code
-                    })
-                    cy.task('loadLineId').then((linea) => {
-                        console.log('lineId caricato: ' + linea)
-                        lineId = linea
-                        console.log(lineId)
-                    })
-                    cy.task('loadContractId').then((contratto) => {
-                        console.log('contractId caricato: ' + contratto)
-                        contractId = contratto
+                    // cy.task('loadCodiceCliente').then((code) => {
+                    //     console.log('codice_cliente caricato: ' + code)
+                    //     codice_cliente = code
+                    // })
+                    // cy.task('loadLineId').then((linea) => {
+                    //     console.log('lineId caricato: ' + linea)
+                    //     lineId = linea
+                    //     console.log(lineId)
+                    // })
+                    // cy.task('loadContractId').then((contratto) => {
+                    //     console.log('contractId caricato: ' + contratto)
+                    //     contractId = contratto
                        
-                        cy.task('loadArrayContracts').then((contratti)=> {
-                            console.log('array Contratti caricato: ' + contratti)
-                            //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
-                            console.log('numero contratti: '+ contratti.length)
-                            for (let i=0;i<contratti.length;i++) {
-                                console.log(`lineId n.${i}: ` + contratti[i].lines[0].id)
-                                console.log(`contractId n.${i}: ` + contratti[i].lines[0].contractId)
-                                console.log(`codice cliente linea n.${i}: ` + contratti[i].lines[0].customerId)
-                            }
-    
-                        })
+                    cy.task('loadArrayContracts').then((contratti)=> {
+                        console.log('array Contratti caricato: ' + contratti)
+                        //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
+                        console.log('numero contratti: '+ contratti.length)
+                        for (let i=0;i<contratti.length;i++) {
+                            console.log(`lineId n.${i}: ` + contratti[i].lines[0].id)
+                            lineId = contratti[i].lines[0].id
+                            console.log(`contractId n.${i}: ` + contratti[i].lines[0].contractId)
+                            contractId = contratti[i].lines[0].contractId
+                            console.log(`codice cliente linea n.${i}: ` + contratti[i].lines[0].customerId)
+                            codice_cliente = contratti[i].lines[0].customerId
+                            cy.request({
+                                method: 'GET',
+                                url: 'https://apigw.bs.windtre.it/api/ob/v2/contract/lineunfolded',
+                                qs: {
+                                    "contractId": contractId,
+                                    "lineId": lineId,
+                                },
+                                headers: {
+                                    Authorization: 'Bearer ' + token,
+                                    'X-Wind-Client': 'web',
+                                    'X-Brand': 'ONEBRAND',
+                                    'Customer-Id': codice_cliente
+                                }
+                        
+                            }).then((resp) => {
+                                // redirect status code is 302
+                                expect(resp.status).to.eq(200)
+                                expect(resp.body.status).to.be.equal('OK')
+                            })
+                        }
 
-                        cy.request({
-                            method: 'GET',
-                            url: 'https://apigw.bs.windtre.it/api/ob/v2/contract/lineunfolded',
-                            qs: {
-                                "contractId": contractId,
-                                "lineId": lineId,
-                            },
-                            headers: {
-                                Authorization: 'Bearer ' + token,
-                                'X-Wind-Client': 'web',
-                                'X-Brand': 'ONEBRAND',
-                                'Customer-Id': codice_cliente
-                            }
-                    
-                        }).then((resp) => {
-                            // redirect status code is 302
-                            expect(resp.status).to.eq(200)
-                        })
+                    })
                 
                     })
                     
                 }
                 )
-            }
-            )
 
         it('/api/v1/app/analytics/token', function()
             {
@@ -223,6 +224,7 @@ describe('PWA test - Test API', function()
                         }).then((resp) => {
                         // redirect status code is 302
                         expect(resp.status).to.eq(200)
+                        expect(resp.body.tokenValue).includes('ya29')
                         })
 
                 })
