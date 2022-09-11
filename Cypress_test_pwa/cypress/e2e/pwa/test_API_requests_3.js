@@ -146,19 +146,6 @@ describe('PWA test - Test API', function()
                 cy.task('loadToken').then((jwt) => {
                     console.log('token jwt: ' + jwt)
                     token = jwt
-                    // cy.task('loadCodiceCliente').then((code) => {
-                    //     console.log('codice_cliente caricato: ' + code)
-                    //     codice_cliente = code
-                    // })
-                    // cy.task('loadLineId').then((linea) => {
-                    //     console.log('lineId caricato: ' + linea)
-                    //     lineId = linea
-                    //     console.log(lineId)
-                    // })
-                    // cy.task('loadContractId').then((contratto) => {
-                    //     console.log('contractId caricato: ' + contratto)
-                    //     contractId = contratto
-                       
                     cy.task('loadArrayContracts').then((contratti)=> {
                         console.log('array Contratti caricato: ' + contratti)
                         //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
@@ -185,9 +172,9 @@ describe('PWA test - Test API', function()
                                 }
                         
                             }).then((resp) => {
-                                // redirect status code is 302
                                 expect(resp.status).to.eq(200)
                                 expect(resp.body.status).to.be.equal('OK')
+                                expect(resp.body.data.lines[0].id).to.be.equal(contratti[i].lines[0].id)
                             })
                         }
 
@@ -206,34 +193,36 @@ describe('PWA test - Test API', function()
                 cy.task('loadToken').then((jwt) => {
                     console.log('token jwt: ' + jwt)
                     token = jwt
-                    cy.task('loadCodiceCliente').then((code) => {
-                        console.log('codice_cliente caricato: ' + code)
-                        codice_cliente = code
-                    })
-
-                    cy.request({
-                        method: 'GET',
-                        url: 'https://apigw.bs.windtre.it/api/v1/app/analytics/token',
-                        headers: {
-                            Authorization: 'Bearer ' + token,
-                            'X-Wind-Client': 'web',
-                            'X-Brand': 'ONEBRAND',
-                            'Customer-Id': codice_cliente
+                    cy.task('loadArrayContracts').then((contratti)=> {
+                        console.log('array Contratti caricato: ' + contratti)
+                        //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
+                        console.log('numero contratti: '+ contratti.length)
+                        for (let i=0;i<contratti.length;i++) {
+                            console.log(`codice cliente linea n.${i}: ` + contratti[i].lines[0].customerId)
+                            codice_cliente = contratti[i].lines[0].customerId
+                            cy.request({
+                                method: 'GET',
+                                url: 'https://apigw.bs.windtre.it/api/v1/app/analytics/token',
+                                headers: {
+                                    Authorization: 'Bearer ' + token,
+                                    'X-Wind-Client': 'web',
+                                    'X-Brand': 'ONEBRAND',
+                                    'Customer-Id': codice_cliente
+                                }
+                        
+                                }).then((resp) => {
+                                // redirect status code is 302
+                                expect(resp.status).to.eq(200)
+                                expect(resp.body.tokenValue).includes('ya29')
+                                })
                         }
-                
-                        }).then((resp) => {
-                        // redirect status code is 302
-                        expect(resp.status).to.eq(200)
-                        expect(resp.body.tokenValue).includes('ya29')
-                        })
 
-                })
+                    })
+                
+                    })
+                    
+                }
+                )
 
             })
-
-
     })
-
-
-}
-)
