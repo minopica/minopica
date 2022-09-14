@@ -154,6 +154,7 @@ describe('1B DEV - Test API', function()
                 })
 
             })
+            
 
             console.log('Valore variabile ambiente SKIP_E2E_TESTS prima del blocco it(): '+ Cypress.env("SKIP_E2E_TESTS"))
             console.log('Valore variabile SKIP_E2E_TESTS prima del blocco it(): '+ SKIP_E2E_TESTS)
