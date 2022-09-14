@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+require('@cypress/skip-test/support')
 import LoginPage from '../../support/pageObjects/LoginPage.js'
 
 
@@ -88,9 +89,16 @@ describe('1B DEV - Test API', function()
                     
             }
             )
-        let SKIP_E2E_TESTS = ""
+
         it('/api/v1/strong-auth/otp/verify', function()
             {
+                cy.on('fail', (e, runnable) => {
+                    console.log('error', e)
+                    console.log('runnable', runnable)
+                    Cypress.env("SKIP_E2E_TESTS",true)
+                    console.log("*****Imposto skip e2e test a true*****")
+                  })
+
                 var challengeToken = ''
                 var token = ''
                 var codice_cliente = ''
@@ -104,9 +112,9 @@ describe('1B DEV - Test API', function()
                     // sbianco token per evitare che i test successivi utilizzino token vecchio
                     cy.task('saveToken', "")
                     // imoosto variabile skip test a true per skippare le successive chiamate in caso di fallimento login.
-                    console.log("*****Imposto skip e2e test a true*****")
-                    Cypress.env("SKIP_E2E_TESTS",true)
-                    console.log("*****Impostato skip e2e test a true*****")
+                    // console.log("*****Imposto skip e2e test a true*****")
+                    // Cypress.env("SKIP_E2E_TESTS",true)
+
 
                     cy.request({
                         method: 'POST',
@@ -139,7 +147,6 @@ describe('1B DEV - Test API', function()
                         
                         // imoosto variabile skip test a false perchè la login è passata
                         Cypress.env("SKIP_E2E_TESTS",false)
-                        SKIP_E2E_TESTS = false
                         console.log("*****Impostato skip e2e test a false*****")
 
                         cy.task('saveCodiceCliente', codice_cliente)
@@ -155,64 +162,64 @@ describe('1B DEV - Test API', function()
 
             })
             
+            it('api/ob/v2/contract/lineunfolded', function()
+            {
+                console.log('Valore variabile ambiente SKIP_E2E_TESTS dentro blocco it() lineUnfolded: '+ Cypress.env("SKIP_E2E_TESTS"))
+                //skip esecuzione test se il flag SKIP_E2E_TESTS è a true.
+                cy.onlyOn(!Cypress.env("SKIP_E2E_TESTS"))
+                var token = ''
+                var codice_cliente = ''
+                var lineId = ''
+                var contractId = ''
 
-            console.log('Valore variabile ambiente SKIP_E2E_TESTS prima del blocco it(): '+ Cypress.env("SKIP_E2E_TESTS"))
-            console.log('Valore variabile SKIP_E2E_TESTS prima del blocco it(): '+ SKIP_E2E_TESTS)
-            if (!SKIP_E2E_TESTS) {
-                it('api/ob/v2/contract/lineunfolded', function()
-                {
-                    var token = ''
-                    var codice_cliente = ''
-                    var lineId = ''
-                    var contractId = ''
-    
-                    cy.task('loadToken').then((jwt) => {
-                        console.log('token jwt: ' + jwt)
-                        token = jwt
-                        cy.task('loadArrayContracts').then((contratti)=> {
-                            console.log('array Contratti caricato: ' + contratti)
-                            //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
-                            console.log('numero contratti: '+ contratti.length)
-                            for (let i=0;i<contratti.length;i++) {
-                                console.log(`lineId n.${i}: ` + contratti[i].lines[0].id)
-                                lineId = contratti[i].lines[0].id
-                                console.log(`contractId n.${i}: ` + contratti[i].lines[0].contractId)
-                                contractId = contratti[i].lines[0].contractId
-                                console.log(`codice cliente linea n.${i}: ` + contratti[i].lines[0].customerId)
-                                codice_cliente = contratti[i].lines[0].customerId
-                                cy.request({
-                                    method: 'GET',
-                                    url: 'https://pre.windtre.it/ob/int/gw/api/ob/v2/contract/lineunfolded',
-                                    qs: {
-                                        "contractId": contractId,
-                                        "lineId": lineId,
-                                    },
-                                    headers: {
-                                        Authorization: 'Bearer ' + token,
-                                        'X-Wind-Client': 'web',
-                                        'X-Brand': 'ONEBRAND',
-                                        'Customer-Id': codice_cliente
-                                    }
-                            
-                                }).then((resp) => {
-                                    expect(resp.status).to.eq(200)
-                                    expect(resp.body.status).to.be.equal('OK')
-                                    expect(resp.body.data.lines[0].id).to.be.equal(contratti[i].lines[0].id)
-                                })
-                            }
-    
-                        })
-                    
-                        })
+                cy.task('loadToken').then((jwt) => {
+                    console.log('token jwt: ' + jwt)
+                    token = jwt
+                    cy.task('loadArrayContracts').then((contratti)=> {
+                        console.log('array Contratti caricato: ' + contratti)
+                        //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
+                        console.log('numero contratti: '+ contratti.length)
+                        for (let i=0;i<contratti.length;i++) {
+                            console.log(`lineId n.${i}: ` + contratti[i].lines[0].id)
+                            lineId = contratti[i].lines[0].id
+                            console.log(`contractId n.${i}: ` + contratti[i].lines[0].contractId)
+                            contractId = contratti[i].lines[0].contractId
+                            console.log(`codice cliente linea n.${i}: ` + contratti[i].lines[0].customerId)
+                            codice_cliente = contratti[i].lines[0].customerId
+                            cy.request({
+                                method: 'GET',
+                                url: 'https://pre.windtre.it/ob/int/gw/api/ob/v2/contract/lineunfolded',
+                                qs: {
+                                    "contractId": contractId,
+                                    "lineId": lineId,
+                                },
+                                headers: {
+                                    Authorization: 'Bearer ' + token,
+                                    'X-Wind-Client': 'web',
+                                    'X-Brand': 'ONEBRAND',
+                                    'Customer-Id': codice_cliente
+                                }
                         
-                    }
-                    )
-    
+                            }).then((resp) => {
+                                expect(resp.status).to.eq(200)
+                                expect(resp.body.status).to.be.equal('OK')
+                                expect(resp.body.data.lines[0].id).to.be.equal(contratti[i].lines[0].id)
+                            })
+                        }
+
+                    })
+                
+                    })
+                    
+                }
+                )
+
             it('/api/v1/app/analytics/token', function()
                 {
                     var token = ''
                     var codice_cliente = ''
-    
+                    console.log('Valore variabile ambiente SKIP_E2E_TESTS dentro blocco it() analyticsToken: '+ Cypress.env("SKIP_E2E_TESTS"))
+
                     cy.task('loadToken').then((jwt) => {
                         console.log('token jwt: ' + jwt)
                         token = jwt
@@ -239,16 +246,13 @@ describe('1B DEV - Test API', function()
                                     expect(resp.body.tokenValue).includes('ya29')
                                     })
                             }
-    
+
                         })
                     
                         })
                         
                     }
                     )
-              }
-
- 
 
             })
     })
