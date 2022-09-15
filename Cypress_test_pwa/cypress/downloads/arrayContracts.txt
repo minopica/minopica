@@ -1,24 +1,24 @@
 [
   {
-    "id": "1017263163303",
-    "customerId": "1345662",
+    "id": "1015805117967",
+    "customerId": "3000641323",
     "status": "ACTIVE",
     "brand": "WIND",
     "paymentType": "PRE",
     "sme": false,
-    "flagMigrazione": "Y",
+    "flagMigrazione": "N",
     "lines": [
       {
-        "id": "3932126074",
-        "customerId": "1345662",
-        "contractId": "1017263163303",
-        "alias": "3932126074",
+        "id": "3280103077",
+        "customerId": "3000641323",
+        "contractId": "1015805117967",
+        "alias": "3280103077",
         "mobile": true,
         "sme": false,
         "paymentType": "PRE",
         "simCard": {
-          "id": "3932126074",
-          "lineId": "3932126074",
+          "id": "3280103077",
+          "lineId": "3280103077",
           "puk": null,
           "simType": "LTE"
         },
@@ -27,15 +27,58 @@
         "features": [
           "MOBILE"
         ],
-        "lineAdslId": "3932126074",
-        "flagMigrazione": "Y",
-        "dataAttivazionePhoenix": "01/03/2022",
-        "dataAttivazionePeoplesoft": "12/20/2021",
-        "idPortfolioPeoplesoft": "1256110",
-        "idClientePeoplesoft": "1345662",
+        "lineAdslId": "3280103077",
+        "flagMigrazione": "N",
+        "dataAttivazionePhoenix": "05/12/2021",
+        "dataAttivazionePeoplesoft": "",
+        "idPortfolioPeoplesoft": "",
+        "idClientePeoplesoft": "",
         "simType": null,
         "flagFarc": "Y",
-        "idBillingAccount": "1300004589",
+        "idBillingAccount": "3000641392",
+        "sharedFarcCdf": false,
+        "wasTied": "NA",
+        "flagInstallment": false
+      }
+    ]
+  },
+  {
+    "id": "1016879894003",
+    "customerId": "3000641323",
+    "status": "ACTIVE",
+    "brand": "WIND",
+    "paymentType": "PRE",
+    "sme": false,
+    "flagMigrazione": "N",
+    "lines": [
+      {
+        "id": "3883695109",
+        "customerId": "3000641323",
+        "contractId": "1016879894003",
+        "alias": "3883695109",
+        "mobile": true,
+        "sme": false,
+        "paymentType": "PRE",
+        "simCard": {
+          "id": "3883695109",
+          "lineId": "3883695109",
+          "puk": null,
+          "simType": "LTE"
+        },
+        "tariffPlan": null,
+        "integrationStack": "LEGACY",
+        "features": [
+          "MOBILE"
+        ],
+        "lineAdslId": "3883695109",
+        "flagMigrazione": "N",
+        "dataAttivazionePhoenix": "09/03/2021",
+        "dataAttivazionePeoplesoft": "",
+        "idPortfolioPeoplesoft": "",
+        "idClientePeoplesoft": "",
+        "simType": null,
+        "flagFarc": "Y",
+        "idBillingAccount": "3000641393",
         "sharedFarcCdf": false,
         "wasTied": "NA",
         "flagInstallment": false

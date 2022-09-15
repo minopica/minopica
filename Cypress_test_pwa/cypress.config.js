@@ -20,6 +20,10 @@ module.exports = defineConfig({
       // implement node event listeners here
       const store = {}
       on('task',{
+          log (message) {
+            console.log(message)
+            return null
+          },
         saveToken(jwt) {
           console.log('token saveToken jwt:' + jwt)
           store['token'] = jwt
@@ -71,6 +75,6 @@ module.exports = defineConfig({
 
       })
     },
-    specPattern: 'cypress/e2e/pwa/*.js'
+    specPattern: ['cypress/e2e/pwa/*.js','cypress/e2e/api/*.js']
   },
 });
