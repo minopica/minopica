@@ -1,6 +1,18 @@
 [
         {
+            "username": "cfus06@test.it",
+            "password": "a12345678B!"
+        },
+        {
+            "username": "107935_10f1@test.it",
+            "password": "12345678"
+        },
+        {
             "username": "108510_01@test.it",
+            "password": "12345678"
+        },
+        {
+            "username": "107272_03a@test.it",
             "password": "12345678"
         },
         {
@@ -9,7 +21,7 @@
         },
         {
             "username": "ppp3@test.it",
-            "password": "12345678c"
+            "password": "12345678"
         },
         {
             "username": "107965_210@test.it",

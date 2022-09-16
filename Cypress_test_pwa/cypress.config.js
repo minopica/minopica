@@ -9,7 +9,10 @@ module.exports = defineConfig({
 
   env: {
     url_bs: 'https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login',
-    url_test: "http://pwa.dev.windtre.it/oa/auth/login"
+    url_test: "http://pwa.dev.windtre.it/oa/auth/login",
+    base_url_bs: "https://apigw.bs.windtre.it",
+    base_url_test: "https://pre.windtre.it/ob/int/gw",
+    base_url_prod: "https://apigw.windtre.it",
   },
 
   e2e: {

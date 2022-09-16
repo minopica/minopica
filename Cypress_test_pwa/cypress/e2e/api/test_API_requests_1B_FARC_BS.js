@@ -6,7 +6,7 @@ import LoginPage from '../../support/pageObjects/LoginPage.js'
 describe('1B FARC API - DEV - Test API', function()
 {
     const loginPage = new LoginPage()
-    const credenziali_test = require('../../fixtures/credenziali_login_farc_test.json')
+    const credenziali_test = require('../../fixtures/credenziali_login_farc_bs.json')
     var arrayContracts = ''
 
     before(() => {
@@ -44,7 +44,7 @@ describe('1B FARC API - DEV - Test API', function()
                   })
 
                 Cypress.config('defaultCommandTimeout', 20000)
-                    let url = Cypress.env("base_url_test") +'/api/v1/strong-auth/credentials'
+                    let url = Cypress.env("base_url_bs") +'/api/v1/strong-auth/credentials'
                     const requestObj = {
                         method: 'POST',
                         url: `${url}`,
@@ -88,7 +88,7 @@ describe('1B FARC API - DEV - Test API', function()
 
                     const requestObj = {
                         method: 'POST',
-                        url: Cypress.env("base_url_test") + '/api/v1/strong-auth/otp/generate',
+                        url: Cypress.env("base_url_bs") + '/api/v1/strong-auth/otp/generate',
                         headers: {
                             "X-W3-Challenge-Token": `${challengeToken}`,
                             'X-Wind-Client': 'app-ios',
@@ -138,7 +138,7 @@ describe('1B FARC API - DEV - Test API', function()
 
                     const requestObj = {
                         method: 'POST',
-                        url: Cypress.env("base_url_test") + '/api/v1/strong-auth/otp/verify',
+                        url: Cypress.env("base_url_bs") + '/api/v1/strong-auth/otp/verify',
                         headers: {
                             "X-W3-Challenge-Token": `${challengeToken}`,
                             'X-Wind-Client': 'app-ios',
@@ -200,7 +200,7 @@ describe('1B FARC API - DEV - Test API', function()
                             
                             const requestObj = {
                                 method: 'GET',
-                                url: Cypress.env("base_url_test") + '/api/ob/v2/contract/lineunfolded',
+                                url: Cypress.env("base_url_bs") + '/api/ob/v2/contract/lineunfolded',
                                 qs: {
                                     "contractId": `${contractId}`,
                                     "lineId": `${lineId}`,
@@ -294,7 +294,7 @@ describe('1B FARC API - DEV - Test API', function()
 
                             const requestObj = {
                                 method: 'POST',
-                                url: Cypress.env("base_url_test") + '/api/v1/ch/payment/bills',
+                                url: Cypress.env("base_url_bs") + '/api/v1/ch/payment/bills',
                                 headers: {
                                     Authorization: 'Bearer ' + `${token}`,
                                     'Customer-Id': `${codice_cliente}`,
@@ -387,7 +387,7 @@ describe('1B FARC API - DEV - Test API', function()
                                         bodyRequest_bills.cdfList[i].lines[y].current = true
                                         const requestObj = {
                                             method: 'POST',
-                                            url: Cypress.env("base_url_test") + '/api/v1/ch/payment/bills/events',
+                                            url: Cypress.env("base_url_bs") + '/api/v1/ch/payment/bills/events',
                                             headers: {
                                                 Authorization: 'Bearer ' + `${token}`,
                                                 'Customer-Id': `${codice_cliente}`,
@@ -484,7 +484,7 @@ describe('1B FARC API - DEV - Test API', function()
                                             bodyRequest_bills.cdfList[i].lines[y].current = true
                                             const requestObj = {
                                                 method: 'POST',
-                                                url: Cypress.env("base_url_test") + '/api/v1/ch/payment/mdp/history',
+                                                url: Cypress.env("base_url_bs") + '/api/v1/ch/payment/mdp/history',
                                                 headers: {
                                                     Authorization: 'Bearer ' + `${token}`,
                                                     'Customer-Id': `${codice_cliente}`,

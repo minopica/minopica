@@ -24,3 +24,20 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));
+
+Cypress.Commands.add('requestAndLog', (cyRequestPayload) => {
+    //const options = Object.entries(cyRequestPayload).map(([key, val]) => `${key}: ${JSON.stringify(val)}`)
+    const options = JSON.stringify(cyRequestPayload,null, "\t")
+    cy.log("*** REQUEST ***")
+    cy.log(options)
+    return cy.request(cyRequestPayload)
+})
+
+Cypress.Commands.add('logResponse', (resp,url) => {
+    cy.log(`*** RESPONSE ${url} ***`)
+    cy.log(JSON.stringify(resp.headers,null, "\t"))
+    cy.log(JSON.stringify(resp.body,null, "\t"))
+})
+
+
+
