@@ -75,9 +75,18 @@ module.exports = defineConfig({
         loadArrayContracts() {
           return store['arrayContracts']
         },
+        saveArrayBills(bills) {
+          console.log('array bills salvato:' + bills)
+          store['arrayBills'] = bills
+          return null
+        },
+        loadArrayBills() {
+          return store['arrayBills']
+        },
+
 
       })
     },
-    specPattern: ['cypress/e2e/pwa/*.js','cypress/e2e/api/*.js']
+    specPattern: ['cypress/e2e/pwa/*.js','cypress/e2e/api/*.js','cypress/e2e/api_single_file/*.js']
   },
 });

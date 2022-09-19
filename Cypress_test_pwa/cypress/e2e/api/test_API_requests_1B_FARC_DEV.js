@@ -241,6 +241,7 @@ describe('1B FARC API - DEV - Test API', function()
             var wasTied = ''
             var bodyRequest_bills = ''
             var indice = ''
+            var arrayBills = ''
 
             cy.task('loadToken').then((jwt) => {
                 console.log('token jwt: ' + jwt)
@@ -307,6 +308,9 @@ describe('1B FARC API - DEV - Test API', function()
                                 expect(resp.status).to.eq(200)
                                 expect(resp.body.status).to.be.equal('OK')
                                 cy.logResponse(resp,requestObj.url)
+                                arrayBills = resp.body.data.bills
+                                console.log('arrayBills: '+ JSON.stringify(arrayBills))
+                                cy.task('saveArrayBills', arrayBills)
                             })
                             // reset current sulla linea appena richiamata a false
                             bodyRequest_bills.cdfList[i].lines[y].current = false
@@ -322,7 +326,7 @@ describe('1B FARC API - DEV - Test API', function()
             }
         )
 
-        it('api/v1/ch/payment/bills/events', function()
+        it.skip('api/v1/ch/payment/bills/events', function()
         {
             //skip esecuzione test se il flag SKIP_E2E_TESTS è a true.
             cy.onlyOn(!Cypress.env("SKIP_E2E_TESTS"))
@@ -417,7 +421,7 @@ describe('1B FARC API - DEV - Test API', function()
             }
         )
 
-        it('api/v1/ch/payment/mdp/history', function()
+        it.skip('api/v1/ch/payment/mdp/history', function()
             {
                 console.log('Valore variabile ambiente SKIP_E2E_TESTS dentro blocco it() lineUnfolded: '+ Cypress.env("SKIP_E2E_TESTS"))
                 //skip esecuzione test se il flag SKIP_E2E_TESTS è a true.
@@ -512,7 +516,7 @@ describe('1B FARC API - DEV - Test API', function()
                 }
         )
 
-        it('api/v1/ch/payment/retrieve-mdp', function()
+        it.skip('api/v1/ch/payment/retrieve-mdp', function()
         {
             console.log('Valore variabile ambiente SKIP_E2E_TESTS dentro blocco it() lineUnfolded: '+ Cypress.env("SKIP_E2E_TESTS"))
             //skip esecuzione test se il flag SKIP_E2E_TESTS è a true.
@@ -597,6 +601,168 @@ describe('1B FARC API - DEV - Test API', function()
                     }
 
 
+                })
+            
+                })
+                
+            }
+        )    
+
+        it.skip('api/v0/ch-payment/billing/summary', function()
+        {
+            console.log('Valore variabile ambiente SKIP_E2E_TESTS dentro blocco it() lineUnfolded: '+ Cypress.env("SKIP_E2E_TESTS"))
+            //skip esecuzione test se il flag SKIP_E2E_TESTS è a true.
+            cy.onlyOn(!Cypress.env("SKIP_E2E_TESTS"))
+            var token = ''
+            var codice_cliente = ''
+            var lineId = ''
+            var contractId = ''
+            var flagFarc = ''
+            var paymentType = ''
+            var cdf = ''
+            var contractStatus = ''
+            var wasTied = ''
+            var bodyRequest_billingSummary = ''
+            var indice = ''
+
+            cy.task('loadToken').then((jwt) => {
+                console.log('token jwt: ' + jwt)
+                token = jwt
+                cy.task('loadArrayContracts').then((contratti)=> {
+                    bodyRequest_billingSummary = []
+                    console.log('array Contratti caricato: ' + contratti)
+                    //console.log('lineId caricato da arrayContratti: '+ contratti[0].lines[0].id)
+                    console.log('numero contratti: '+ contratti.length)
+                    for (let i=0;i<contratti.length;i++) {
+                        flagFarc = contratti[i].lines[0].flagFarc
+                        console.log(`flagFarc linea n.${i}: ` + flagFarc)
+                        if (flagFarc=='N') continue
+                        console.log(`lineId n.${i}: ` + contratti[i].lines[0].id)
+                        lineId = contratti[i].lines[0].id
+                        console.log(`contractId n.${i}: ` + contratti[i].lines[0].contractId)
+                        contractId = contratti[i].lines[0].contractId
+                        console.log(`codice cliente linea n.${i}: ` + contratti[i].lines[0].customerId)
+                        codice_cliente = contratti[i].lines[0].customerId
+                        cdf = contratti[i].lines[0].idBillingAccount
+                        console.log(`CDF linea n.${i}: ` + cdf)
+                        wasTied = contratti[i].lines[0].wasTied
+                        console.log(`wasTied linea n.${i}: ` + wasTied)
+                        paymentType = contratti[i].lines[0].paymentType
+                        console.log(`paymentType linea n.${i}: ` + paymentType)
+                        contractStatus = contratti[i].status
+                        console.log(`contractStatus linea n.${i}: ` + contractStatus)
+
+                        bodyRequest_billingSummary.push({"cdf":cdf, "customerId":codice_cliente,"contractId":contractId,"lineId":lineId})
+
+                        
+                        console.log('stampo oggetto bodyRequest_billingSummary dentro ciclo', bodyRequest_billingSummary)
+                    }
+                    console.log('lunghezza array body billingSummary: ' + bodyRequest_billingSummary.length)
+                    if (bodyRequest_billingSummary.length == 0) {
+                        //nessuna linea ha flagFarc a Y
+                        console.log('*****entro nella condizione per skippare test*****')
+                        return cy.onlyOn(false)
+                    }
+                    
+                    for (let i=0;i<bodyRequest_billingSummary.length;i++) {
+                        const requestObj = {
+                            method: 'POST',
+                            url: Cypress.env("base_url_test") + '/api/v0/ch-payment/billing/summary',
+                            headers: {
+                                Authorization: 'Bearer ' + `${token}`,
+                                'Customer-Id': `${bodyRequest_billingSummary[i].customerId}`,
+                                'X-Wind-Client': 'app-ios',
+                                'X-Brand': 'ONEBRAND',
+                                'Content-Type': 'application/json'
+                            },
+                            body: {
+                                "cdf": `${bodyRequest_billingSummary[i].cdf}`,
+                                "contractId": `${bodyRequest_billingSummary[i].contractId}`,
+                                "customerId": `${bodyRequest_billingSummary[i].customerId}`,
+                                "lineId": `${bodyRequest_billingSummary[i].lineId}`
+                            }
+                        }
+                        cy.requestAndLog(requestObj).then((resp) => {
+                            expect(resp.status).to.eq(200)
+                            expect(resp.body.status).to.be.equal('OK')
+                            cy.logResponse(resp,requestObj.url)
+                        })
+                        
+                    }
+
+
+
+                })
+            
+                })
+                
+            }
+        )
+
+        it('api/v0/ch/payment/bills/detail', function()
+        {
+            console.log('Valore variabile ambiente SKIP_E2E_TESTS dentro blocco it() lineUnfolded: '+ Cypress.env("SKIP_E2E_TESTS"))
+            //skip esecuzione test se il flag SKIP_E2E_TESTS è a true.
+            cy.onlyOn(!Cypress.env("SKIP_E2E_TESTS"))
+            var token = ''
+            var codice_cliente = ''
+            var lineId = ''
+            var contractId = ''
+            var flagFarc = ''
+            var paymentType = ''
+            var cdf = ''
+            var contractStatus = ''
+            var wasTied = ''
+            var bodyRequest_billingSummary = ''
+            var indice = ''
+            var downloadBillPdf = ''
+            var billNumber = ''
+            var billStack = ''
+
+
+            cy.task('loadToken').then((jwt) => {
+                console.log('token jwt: ' + jwt)
+                token = jwt
+                cy.task('loadArrayBills').then((bills)=> {
+                    console.log('array Bills caricato: ' + bills)
+                    console.log('numero bills: '+ bills.length)
+                    for (let i=0;i<bills.length;i++) {
+                        downloadBillPdf = bills[i].downloadBillPdf
+                        console.log(`downloadBillPdf fattura n.${i}: ` + downloadBillPdf)
+                        if (!downloadBillPdf) continue
+                        console.log(`billNumber n.${i}: ` + bills[i].billNumber)
+                        billNumber = bills[i].billNumber
+                        console.log(`cdf n.${i}: ` + bills[i].cdf)
+                        cdf = bills[i].cdf
+                        console.log(`codice cliente fattura n.${i}: ` + bills[i].customerId)
+                        codice_cliente = bills[i].customerId
+                        console.log(`billStack fattura n.${i}: ` + bills[i].billStack)
+                        billStack = bills[i].billStack
+
+                        const requestObj = {
+                            method: 'GET',
+                            url: Cypress.env("base_url_test") + '/api/v0/ch/payment/bills/detail',
+                            headers: {
+                                Authorization: 'Bearer ' + `${token}`,
+                                'Customer-Id': `${codice_cliente}`,
+                                'X-Wind-Client': 'app-ios',
+                                'X-Brand': 'ONEBRAND',
+                                'Content-Type': 'application/json'
+                            },
+                            qs: {
+                                "billStack": `${billStack}`,
+                                "cdf": `${cdf}`,
+                                "billNumber": `${billNumber}`
+                            }
+                        }
+                        cy.requestAndLog(requestObj).then((resp) => {
+                            expect(resp.status).to.eq(200)
+                            console.log("header body length response: "+ resp.body.length )
+                            expect(resp.body.length).to.be.greaterThan(1000)
+                            //cy.logResponse(resp,requestObj.url)
+                        })
+
+                    }
                 })
             
                 })
