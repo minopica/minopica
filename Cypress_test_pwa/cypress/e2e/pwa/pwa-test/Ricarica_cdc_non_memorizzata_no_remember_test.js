@@ -37,7 +37,7 @@ it('Ricarica senza cdc memorizzata no remember - env test', function()
     cy.get('#confirm-payment-button').click() 
 
     // assert su thankyou page
-    cy.wait(15000)
+    cy.wait(20000)
     cy.get("h2[class$='section-title-w-des']").should("have.text","GRAZIE!")
 
 }

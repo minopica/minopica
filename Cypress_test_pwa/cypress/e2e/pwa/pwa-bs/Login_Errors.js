@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import LoginPage from '../../support/pageObjects/LoginPage.js'
+import LoginPage from '../../../support/pageObjects/LoginPage.js'
 
 describe('PWA test - Gestione Errori Login', function()
 {
@@ -55,7 +55,7 @@ it('Login - errore HTTP 404', function()
 }
 )
 
-it('Login - errore HTTP 401', function()
+it.skip('Login - errore HTTP 401', function()
 {
     Cypress.config('defaultCommandTimeout', 20000)
     cy.visit(Cypress.env("url_bs"))

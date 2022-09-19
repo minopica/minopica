@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 /// <reference types="Cypress-iframe" />
 import 'cypress-iframe'
-import LoginPage from '../../support/pageObjects/LoginPage.js'
+import LoginPage from '../../../support/pageObjects/LoginPage.js'
 
 describe('PWA test - Winday', function()
 {

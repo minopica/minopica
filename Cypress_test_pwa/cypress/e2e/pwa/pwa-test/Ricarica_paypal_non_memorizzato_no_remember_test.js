@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import LoginPage from '../../support/pageObjects/LoginPage.js'
+import LoginPage from '../../../support/pageObjects/LoginPage.js'
 
 
 describe('PWA test - Ricarica', function()
@@ -16,7 +16,7 @@ describe('PWA test - Ricarica', function()
 
       })
 
-it('Ricarica senza cdc memorizzata no remember - env test', function()
+it.skip('Ricarica senza cdc memorizzata no remember - env test', function()
 {
     Cypress.config('defaultCommandTimeout', 10000)
     cy.visit(Cypress.env("url_test"))

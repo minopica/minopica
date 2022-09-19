@@ -87,6 +87,6 @@ module.exports = defineConfig({
 
       })
     },
-    specPattern: ['cypress/e2e/pwa/*.js','cypress/e2e/api/*.js','cypress/e2e/api_single_file/*.js']
+    specPattern: ['cypress/e2e/pwa/pwa-bs/*.js','cypress/e2e/pwa/pwa-test/*.js', 'cypress/e2e/api/*.js','cypress/e2e/api_single_file/*.js']
   },
 });
