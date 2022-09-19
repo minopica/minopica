@@ -2,7 +2,7 @@
 
 describe('PWA test - Ricarica', function()
 {
-it('Ricarica - controllo chiamata cancel in webview SIA al back da inserimento CDC - env BS', function()
+it('Ricarica - controllo chiamata cancel in webview PAYPAL al back da inserimento Paypal - env BS', function()
 {
     Cypress.config('defaultCommandTimeout', 10000)
     cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")

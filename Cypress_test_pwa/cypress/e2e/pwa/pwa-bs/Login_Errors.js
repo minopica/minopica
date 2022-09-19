@@ -17,9 +17,7 @@ describe('PWA test - Gestione Errori Login', function()
 
 it('Login - errore HTTP 404', function()
 {
-    //const loginPage = new LoginPage()
     Cypress.config('defaultCommandTimeout', 20000)
-    //cy.visit("https://priv:P3rz0nal!@pwa.bs.windtre.it/oa/auth/login")
     cy.visit(Cypress.env("url_bs"))
     //cy.get('#login_entra').click()
     loginPage.getEntraButton().click()

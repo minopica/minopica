@@ -22,6 +22,12 @@ describe('PWA test - Ricarica', function()
         // cy.get('#credit_banner_ricarica').click()
         cy.wait(10000)
 
+        // click su icona Rubrica
+        ricaricaPage.get_iconaRubrica().click()
+
+        // click su primo numero in rubrica
+        ricaricaPage.get_lineaDaRicaricareAnag().click()
+
         // seleziona taglio da 11€
         ricaricaPage.get_taglio_11euro().click()
         

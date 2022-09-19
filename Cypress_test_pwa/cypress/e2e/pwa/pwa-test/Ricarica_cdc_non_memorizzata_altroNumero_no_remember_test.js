@@ -22,6 +22,9 @@ describe('PWA test - Ricarica', function()
         // cy.get('#credit_banner_ricarica').click()
         cy.wait(10000)
 
+        // inserisci manualmente numero da ricarica esterno all'anagrafica
+        ricaricaPage.get_numeroDaRicaricare().clear().type('3272948837')
+
         // seleziona taglio da 11€
         ricaricaPage.get_taglio_11euro().click()
         

@@ -5,6 +5,7 @@ module.exports = defineConfig({
   projectId: "rwdmnz",
   defaultCommandTimeout: 20000,
   pageLoadTimeout: 60000,
+  requestTimeout: 10000,
   watchForFileChanges: false,
 
   env: {
