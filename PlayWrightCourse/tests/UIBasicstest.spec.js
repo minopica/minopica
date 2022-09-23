@@ -1,7 +1,7 @@
 const {test, expect} = require('@playwright/test')
 // browser e page sono fixture visibili a livello globale, vanno passate tra {}
 
-test.only('Browser Playwright test', async ({browser})=>
+test('Browser Playwright test', async ({browser})=>
 {
     //chrome - plugins - cookies - context
     const context = await browser.newContext()

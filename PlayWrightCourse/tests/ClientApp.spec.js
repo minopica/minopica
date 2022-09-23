@@ -1,7 +1,7 @@
 const {test, expect} = require('@playwright/test')
 // browser e page sono fixture visibili a livello globale, vanno passate tra {}
 
-test.only('Page Playwright test', async ({page})=>
+test('Page Playwright test', async ({page})=>
 {
     await page.goto("https://rahulshettyacademy.com/client")
     await page.locator('#userEmail').fill("minopica@gmail.com")

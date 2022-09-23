@@ -33,8 +33,8 @@ test('Child Window Playwright test', async ({browser})=>
 
     // insert domain value extracted dentro username edit box nella finestra browser parent page
     await userName.type(domain)
-    await page.pause()
-    
+    //await page.pause()
+
     // stampare valore input nella textField
     console.log(await userName.inputValue())
 

@@ -21,7 +21,6 @@ test('UI Dropdown Playwright test', async ({page})=>
     await page.locator('#okayBtn').click()
 
     //lanciare playright inspector per debug
-    await page.pause()
-
+    //await page.pause()
 
 })
