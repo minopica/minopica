@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test')
 
-test.only('Frames validations', async({page})=>
+test('Frames validations', async({page})=>
 {
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/")
     // per switchare su iframe è necessario id o name del frame
