@@ -31,7 +31,7 @@ const config = {
     headless: false,
     screenshot: 'on',
     //trace: 'on'
-    trace: 'retain-on-failure'
+    trace: 'on' //'retain-on-failure'
 
   },
 }
