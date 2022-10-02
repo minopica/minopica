@@ -8,6 +8,11 @@ logs
 # Ignore the build directory
 /dist
 
+# Ignore image files
+*.png
+*.jpg
+*.jpeg
+
 # The file containing environment variables 
 .env
 
