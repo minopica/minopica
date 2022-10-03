@@ -1,0 +1,28 @@
+const {expect} = require('@playwright/test')
+
+class CartPage {
+
+    constructor(page) {
+        this.page = page
+        this.productAdidas = page.locator("h3:has-text('adidas original')")
+        this.checkout = page.locator('text=Checkout')
+    }
+
+    async checkAdidasProduct() {
+        const elemento = this.page.locator('div li').first()
+        await elemento.waitFor() 
+        // const bool = await page.locator("h3:has-text('adidas original')").isVisible()
+        // expect(bool).toBeTruthy()
+        //console.log(await page.locator("h3:has-text('adidas original')").textContent())
+        // await page.pause()
+        const bool = await this.productAdidas.isVisible()
+        expect(bool).toBeTruthy()
+    }
+
+    async checkout_click()
+    {
+        this.checkout.click()
+    }
+}
+
+module.exports = {CartPage}
