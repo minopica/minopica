@@ -5,6 +5,7 @@ class HomePage {
         this.products = page.locator(".card-body")
         this.productsText = page.locator(".card-body b")
         this.cart = page.locator('[routerLink*="cart"]')
+        this.ordersTab = page.locator("label[routerlink='/dashboard/myorders']")
 
     }
 
@@ -27,6 +28,11 @@ class HomePage {
     async navigateToCart()
     {
         await this.cart.click()
+    }
+
+    async navigateToOrders()
+    {
+        await this.ordersTab.click()
     }
 
 }
