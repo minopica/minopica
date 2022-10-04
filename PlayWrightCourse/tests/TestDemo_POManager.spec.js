@@ -1,21 +1,17 @@
 const {test, expect} = require('@playwright/test')
 const {POManager} = require('../pageObjects/POManager')
+const dataset = JSON.parse(JSON.stringify(require ('../utils/TestDemoTestData.json')))
 
 test('Page Playwright test', async ({page})=>
 {
     const poManager = new POManager(page)
-    const products = page.locator('.card-body')
-    const productName = "adidas original"
-    const username = "minopica@gmail.com"
-    const password = "Minone@h3g"
-
     const loginPage = poManager.getLoginPage()
 
     await loginPage.goTo()
-    await loginPage.validLogin(username,password)
+    await loginPage.validLogin(dataset.username,dataset.password)
 
     const homePage = poManager.getHomePage()
-    await homePage.searchProductAddCart(productName)
+    await homePage.searchProductAddCart(dataset.productName)
     //entrare nel carrello e controllare il prodotto nella lista
     await homePage.navigateToCart()
 
@@ -31,7 +27,7 @@ test('Page Playwright test', async ({page})=>
     await checkoutPage.selectCountryFunc('India')
 
     // assert sul testo contenuto nell'input textField
-    await checkoutPage.checkUsername(username)
+    await checkoutPage.checkUsername(dataset.username)
 
      // click su PLACE ORDER
     await checkoutPage.placeOrderClick()
