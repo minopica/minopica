@@ -1,5 +1,5 @@
 const {test, expect, request} = require('@playwright/test')
-const {APIUtils} = require('./utils/APIUtils')
+const {APIUtils} = require('../utils/APIUtils')
 const loginPayload = {userEmail:"minopica@gmail.com",userPassword:"Minone@h3g"}
 const orderPayload = {orders:[{country:"Cuba",productOrderedId:"6262e990e26b7e1a10e89bfa"}]}
 const fakePayloadOrders = {data:[], message:"No Orders"}
@@ -64,5 +64,9 @@ test('Create Order with API', async ({page})=>
     })
     // click su order history
     await page.locator("button[routerlink='/dashboard/myorders']").click()
+    // introdotto un wait di 5sec
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    await delay(5000);
+    
     console.log(await page.locator(".mt-4").textContent())
 })
