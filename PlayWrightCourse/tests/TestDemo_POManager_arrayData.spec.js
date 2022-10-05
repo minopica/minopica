@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test')
 const {POManager} = require('../pageObjects/POManager')
-const dataset = JSON.parse(JSON.stringify(require ('../utils/TestDemoTestData.json')))
+const dataset = JSON.parse(JSON.stringify(require ('../utils/TestDemoTestDataArray.json')))
 
 for (const data of dataset) {
 

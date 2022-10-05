@@ -26,14 +26,34 @@ const config = {
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    browserName : 'chromium',
-    headless: false,
-    screenshot: 'on',
-    //screenshot: 'only-on-failure',
-    //trace: 'on'
-    trace: 'on' //'retain-on-failure'
+  
+  projects: [
+    {
+      name: 'safari',
+      use: {
+        browserName : 'webkit',
+        headless: true,
+        screenshot: 'only-on-failure',
+        //trace: 'on'
+        trace: 'on' //'retain-on-failure'
+    
+      }
+    },
+    {
+      name: 'chrome',
+      use: {
+        browserName : 'chromium',
+        headless: true,
+        screenshot: 'only-on-failure',
+        //trace: 'on'
+        trace: 'on' //'retain-on-failure'
+    
+      }
+    },
 
-  },
+  ]
+  
+  
+  
 }
 module.exports = config;
