@@ -26,6 +26,8 @@ class OrdersPage
 
     async checkOrderId(orderId) {
         const orderID_finale = await this.orderIdDetail.textContent()
+        console.log("ordine estratto da pagina di conferma ordine"+orderID_finale)
+        console.log("ordine con cui confrontare - il precedente deve essere incluso in questo"+orderId)
         expect(orderId.includes(orderID_finale)).toBeTruthy()
     }
 

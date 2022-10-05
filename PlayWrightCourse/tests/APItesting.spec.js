@@ -43,7 +43,7 @@ test.beforeEach( ()=>
 })
 
 
-test.only('Create Order with API', async ({page})=>
+test('Create Order with API', async ({page})=>
 {
     // eseguire codice javascript per inserire token nell'area di memoria "localStorage" -> page.addInitScript, prende in input due argomenti.
     page.addInitScript(value => {

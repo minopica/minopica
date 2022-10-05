@@ -2,7 +2,7 @@ const {test, expect} = require('@playwright/test')
 const {POManager} = require('../pageObjects/POManager')
 const dataset = JSON.parse(JSON.stringify(require ('../utils/TestDemoTestData.json')))
 
-test('Page Playwright test', async ({page})=>
+test('Demo page test - POManager @smoke', async ({page})=>
 {
     const poManager = new POManager(page)
     const loginPage = poManager.getLoginPage()
@@ -16,7 +16,7 @@ test('Page Playwright test', async ({page})=>
     await homePage.navigateToCart()
 
     const cartPage = poManager.getCartPage()
-    await cartPage.checkAdidasProduct()
+    await cartPage.checkProduct(dataset.productName)
 
     // click su Checkout
     await cartPage.checkout_click()

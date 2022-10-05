@@ -4,7 +4,7 @@ const dataset = JSON.parse(JSON.stringify(require ('../utils/TestDemoTestDataArr
 
 for (const data of dataset) {
 
-    test(`Test App ${data.username}`, async ({page})=>
+    test(`@smoke Test App - POManager Array ${data.username}`, async ({page})=>
     {
         const poManager = new POManager(page)
         const loginPage = poManager.getLoginPage()

@@ -2,6 +2,7 @@ class HomePage {
     
     constructor(page)
     {
+        this.page = page
         this.products = page.locator(".card-body")
         this.productsText = page.locator(".card-body b")
         this.cart = page.locator('[routerLink*="cart"]')
@@ -11,6 +12,10 @@ class HomePage {
 
     async searchProductAddCart(productName)
     {  
+        // introdurre attesa fino a quando le chiamate di rete non sono state completate
+        await this.page.waitForLoadState('networkidle')
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        await delay(5000);
         const titles = await this.productsText.allTextContents()
         console.log(titles)
 

@@ -1,5 +1,8 @@
-# Ignore the node_modules directory
+# Ignore the node_modules and test results directory
 node_modules/
+allure-results/
+allure-report/
+playwright-report/
 
 # Ignore Logs
 logs

@@ -1,5 +1,5 @@
 const {test, expect, request} = require('@playwright/test')
-const {APIUtils} = require('./utils/APIUtils')
+const {APIUtils} = require('../utils/APIUtils')
 const loginPayload = {userEmail:"minopica@gmail.com",userPassword:"Minone@h3g"}
 const orderPayload = {orders:[{country:"Cuba",productOrderedId:"6262e990e26b7e1a10e89bfa"}]}
 
@@ -20,7 +20,7 @@ test.beforeEach( ()=>
 })
 
 
-test.only('Create Order with API', async ({page})=>
+test('Create Order with API', async ({page})=>
 {
     
     // eseguire codice javascript per inserire token nell'area di memoria "localStorage" -> page.addInitScript, prende in input due argomenti.

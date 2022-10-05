@@ -10,9 +10,9 @@ const { OrdersPage } = require('../pageObjects/OrdersPage')
 test('Page Playwright test', async ({page})=>
 {
     const products = page.locator('.card-body')
-    const productName = "adidas original"
-    const username = "minopica@gmail.com"
-    const password = "Minone@h3g"
+    const productName = "zara coat 3"
+    const username = "anshika@gmail.com"
+    const password = "Iamking@000"
     const loginPage = new LoginPage(page)
     const homePage = new HomePage(page)
     const cartPage = new CartPage(page)
@@ -25,7 +25,7 @@ test('Page Playwright test', async ({page})=>
     await homePage.searchProductAddCart(productName)
     //entrare nel carrello e controllare il prodotto nella lista
     await homePage.navigateToCart()
-    await cartPage.checkAdidasProduct()
+    await cartPage.checkProduct(productName)
 
     // click su Checkout
     await cartPage.checkout_click()

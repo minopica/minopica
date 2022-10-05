@@ -19,7 +19,7 @@ const config = {
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   // numero di workers
-  workers: 2,
+  workers: 1,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.

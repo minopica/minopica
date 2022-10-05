@@ -1,7 +1,8 @@
 const {test, expect} = require('@playwright/test')
 // browser e page sono fixture visibili a livello globale, vanno passate tra {}
 
-test.describe.configure({mode:'parallel'})
+//test.describe.configure({mode:'parallel'})
+test.describe.configure({mode:'serial'}) // se fallisce 1 test gli altri vengono skippati
 test('Browser Playwright test', async ({browser})=>
 {
     //chrome - plugins - cookies - context
