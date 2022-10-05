@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test tests/APItesting2.spec.js --headed"
+    "test": "npx playwright test tests/APItesting2.spec.js --headed",
+    "regression": "npx playwright test",
+    "smoke": "npx playwright test --grep @smoke",
+    "safariNewConfig": "npx playwright test --headed --config playwright.config1.js --project=safari"
   },
   "keywords": [],
   "author": "",
