@@ -14,8 +14,12 @@ const { devices } = require('@playwright/test');
  */
 const config = {
   testDir: './tests',
+  // number of retry for a FAILED test
+  retries: 1,
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
+  // numero di workers
+  workers: 2,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -32,21 +36,25 @@ const config = {
       name: 'safari',
       use: {
         browserName : 'webkit',
-        headless: true,
+        headless: false,
         screenshot: 'only-on-failure',
-        //trace: 'on'
-        trace: 'on' //'retain-on-failure'
-    
+        video: 'retain-on-failure',
+        trace: 'retain-on-failure',
+        //viewport: {width:720, height:720}
+        //...devices['iPhone 11 Pro Max']
       }
     },
     {
       name: 'chrome',
       use: {
         browserName : 'chromium',
-        headless: true,
+        headless: false,
+        video: 'retain-on-failure',
         screenshot: 'only-on-failure',
-        //trace: 'on'
-        trace: 'on' //'retain-on-failure'
+        trace: 'retain-on-failure',
+        permissions: ['geolocation'],
+        ignoreHTTPSErrors: true,
+        //...devices['Pixel 4a (5G)']
     
       }
     },
